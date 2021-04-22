@@ -1,0 +1,7 @@
+image:
+  repository: jorgeregula/products
+  tag: latest
+  pullPolicy: Always
+
+microservice: products
+namespace: products

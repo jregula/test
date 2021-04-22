@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.microservice }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.microservice }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.microservice }}
+    spec:
+      containers:
+      - name: {{ .Values.microservice }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - name: {{ .Values.microservice }}
+            containerPort: 5000
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
